@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const colors = require('colors');
 const path = require('path');
 
-const resolveRoute = (file) => {
+const routeAbs = (file) => {
   if (path.isAbsolute(file) === true) {
       console.log(file);
   } else {
@@ -12,9 +12,9 @@ const resolveRoute = (file) => {
       return pathAbs;    
   };
 };
-resolveRoute(readme);
+routeAbs(readme);
 
-const printResults = (res) => {
+const printData = (res) => {
 
   const allResponse = {
       page: res.url,
@@ -24,19 +24,17 @@ const printResults = (res) => {
    if (allResponse.pageStatus !== 200){
      const notFound = `PATH ${pathAbs} ${allResponse.page} ${allResponse.pageStatus} ${allResponse.pageMessage}`;
     console.log(notFound.red);
-     //console.log( pathAbs +"LinkCheck:".red +' '+ allResponse.page +' '+ "Status:".yellow +' '+ allResponse.pageStatus + ' ' + "networkMessage:".magenta +' '+ allResponse.pageMessage);
   }else{
     const linkFound = `PATH ${pathAbs} ${allResponse.page} ${allResponse.pageStatus} ${allResponse.pageMessage}`;
     console.log(linkFound.cyan);
-    //console.log( pathAbs +"LinkCheck:".cyan +' '+ allResponse.page +' '+ "Status:".yellow +' '+ allResponse.pageStatus + ' ' + "networkMessage:".magenta +' '+ allResponse.pageMessage);
   }
   
 };
-const getResponse = (result) => {
-  // console.log(result);
-  fetch(result).then((res) => {
-      // console.log(res);
-      printResults(res);
+const getRes = (link) => {
+   //console.log(result);
+  fetch(link).then((res) => {
+      console.log(res);
+      printData(res);
   });
 };
 const getLinks = (err, string) => {
@@ -49,7 +47,7 @@ const getLinks = (err, string) => {
           const cutLink = links[i].split(')');
           const result = cutLink[0];
           // console.log(result);
-          getResponse(result);
+          getRes(result);
       };
   };
 };
