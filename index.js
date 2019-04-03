@@ -12,7 +12,6 @@ const routeAbs = (file) => {
       return pathAbs;    
   };
 };
-routeAbs(readme);
 
 const printData = (res) => {
 
@@ -22,18 +21,18 @@ const printData = (res) => {
       pageMessage: res.statusText
   };
    if (allResponse.pageStatus !== 200){
-     const notFound = `PATH ${pathAbs} ${allResponse.page} ${allResponse.pageStatus} ${allResponse.pageMessage}`;
+     const notFound = `PATH: ${pathAbs} Link: ${allResponse.page} Status: ${allResponse.pageStatus} Message: ${allResponse.pageMessage}`;
     console.log(notFound.red);
   }else{
-    const linkFound = `PATH ${pathAbs} ${allResponse.page} ${allResponse.pageStatus} ${allResponse.pageMessage}`;
-    console.log(linkFound.cyan);
+    const linkFound = `PATH ${pathAbs} Link: ${allResponse.page} Status: ${allResponse.pageStatus} Message: ${allResponse.pageMessage}`;
+    console.log(linkFound.green);
   }
   
 };
 const getRes = (link) => {
    //console.log(result);
   fetch(link).then((res) => {
-      console.log(res);
+      //console.log(res);
       printData(res);
   });
 };
@@ -46,13 +45,14 @@ const getLinks = (err, string) => {
       for (let i = 0; i < links.length; i++) {
           const cutLink = links[i].split(')');
           const result = cutLink[0];
-          // console.log(result);
+          //console.log(result);
           getRes(result);
       };
   };
 };
 
 const mdLinks = (readme) => {
+  routeAbs(readme);
   fs.readFile(readme, 'utf-8', getFile = (err, str) => {
       if (err) {
           console.log(err.message);
