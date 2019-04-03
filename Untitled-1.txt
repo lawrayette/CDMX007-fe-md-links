@@ -1,0 +1,41 @@
+// Declaración de módulos de NODEjs
+const fs = require("fs");
+const fetch = require('node-fetch');
+const colors = require('colors');
+const path = require('path');
+const archive = ('./README.md');
+
+// Función que accede a la ruta absoluta del archivo
+const resolveRoute = (archive) => {
+  if (path.isAbsolute(archive) === true) {
+
+  } else {
+    console.log(path.resolve(archive).bgGreen.black);
+
+  };
+};
+
+// Función para acceder  los enlaces del readme y los imprime en la consola. 
+const file = () => {
+  fs.readFile(archive, (error, data) => {
+    if (error) {
+      //console.log('error')
+    } else {
+      const readme = data.toString().magenta;
+      console.log(readme)
+      const regExp = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+      const link = readme.match(regExp);
+      const nlink = link.length;
+      console.log(link)
+      console.log(nlink);
+
+    }
+  })
+}
+
+
+
+
+
+file();
+resolveRoute(archive);
