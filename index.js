@@ -16,8 +16,8 @@ const routeAbs = (file) => {
 };
 routeAbs(readme);
 
-// función que imprime data
-const printData = (res) => {
+// función que imprime Validate
+const validate = (res) => {
 
   const allResponse = {
       page: res.url,
@@ -26,13 +26,17 @@ const printData = (res) => {
   };
    if (allResponse.pageStatus !== 200){
      const notFound = `PATH ${pathAbs} ${allResponse.page} ${allResponse.pageStatus} ${allResponse.pageMessage}`;
-    console.log(notFound.red);
+     console.log(notFound.red);
+          
   }else{
-    const linkFound = `PATH ${pathAbs} ${allResponse.page} ${allResponse.pageStatus} ${allResponse.pageMessage}`;
-    console.log(linkFound.cyan);
+    const linkFound = `PATH  ${pathAbs} ${allResponse.page} ${allResponse.pageStatus} ${allResponse.pageMessage}`;
+    console.log(linkFound.bold.green);
+    
   }
-  
+
 };
+
+// Función que imprimirá State
 
 
 // Petición de enlaces funcionales o rotos
@@ -40,8 +44,8 @@ const getRes = (link) => {
    //console.log(result);
   fetch(link).then((res) => {
       //console.log(res);
-      printData(res);
-  });
+      validate(res);
+   });
 };
 
 // Obtene al array de enlaces
@@ -49,7 +53,7 @@ const getLinks = (err, string) => {
   if (err) {
       console.log(err.message);
   } else {
-      const regEx = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))/g;
+      const regEx = /(https?):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))/g;
       const links = string.match(regEx);
       for (let i = 0; i < links.length; i++) {
           const cutLink = links[i].split(')');
