@@ -1,11 +1,11 @@
-// Declaración de módulos y de variable
+//Declara módulos
 const fs = require("fs");
 const readme = './README.md';
 const fetch = require('node-fetch');
 const colors = require('colors');
 const path = require('path');
 
-// Función para Path
+//Obtiene ruta absoluta de README
 const routeAbs = (file) => {
   if (path.isAbsolute(file) === true) {
       console.log(file);
@@ -16,8 +16,7 @@ const routeAbs = (file) => {
 };
 routeAbs(readme);
 
-
-//Imprime los datos en consola
+// función que imprime data
 const printData = (res) => {
 
   const allResponse = {
@@ -35,16 +34,17 @@ const printData = (res) => {
   
 };
 
-// Hace la petición 
+
+// Petición de enlaces funcionales o rotos
 const getRes = (link) => {
    //console.log(result);
   fetch(link).then((res) => {
-    //  console.log(res);
+      //console.log(res);
       printData(res);
   });
 };
 
-// Obtiene los enlaces del archivo de texto plano
+// Obtene al array de enlaces
 const getLinks = (err, string) => {
   if (err) {
       console.log(err.message);
@@ -60,7 +60,7 @@ const getLinks = (err, string) => {
   };
 };
 
-// Realiza la lectura del README
+// Lee el readme
 const mdLinks = (readme) => {
   fs.readFile(readme, 'utf-8', getFile = (err, str) => {
       if (err) {
@@ -72,5 +72,3 @@ const mdLinks = (readme) => {
 };
 mdLinks(readme);
 
-
-module.exports = {mdLinks};
