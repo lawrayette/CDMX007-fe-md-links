@@ -49,7 +49,7 @@ const getLinks = (err, string) => {
   if (err) {
       console.log(err.message);
   } else {
-      const regEx = /(http:\/\/|https:\/\/|www\.)[^\s][^)]+/g;
+      const regEx = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))/g;
       const links = string.match(regEx);
       for (let i = 0; i < links.length; i++) {
           const cutLink = links[i].split(')');
