@@ -17,18 +17,11 @@ const mdLinks = (routeMD, option) => {
         const markdown = fs.readFileSync(routeMD).toString();
         const links = markdownLinkExtractor(markdown);
         let resultLinks = [];
-        let line=0
-        for (let i = 0; i < links.length; i++) {
-            let text = links[i].text;
-            line++
-            
+            for (let i = 0; i < links.length; i++) {
+                   
             const arrPromise = fetch(links[i])
             .then(res => {
-                if (option === "--stats") {
-                    total= `${"Total:"+line}`
-                            
-                    return total
-                }else  if (option === "--validate") {
+                 if (option === "--validate") {
                     let objetLinks = {
                         urlLinks: `${res.url}`,
                         statusLinks: `${res.status}`,
@@ -49,8 +42,11 @@ const mdLinks = (routeMD, option) => {
                     return objetErr;
                 })
             resultLinks.push(arrPromise)
+           
         }
-        return Promise.all(resultLinks) //
+        
+        const data =  Promise.all(resultLinks)
+        return data //
        //returns a single Promise that resolves when all of the promises passed as an 
        //iterable have resolved or when the iterable contains no promises. Promise.all() 
        //method can be useful for aggregating the results of multiple promises. 
