@@ -51,13 +51,25 @@ La librería está hecha con NodeJS. Utilizando lo siguiente:
 - Jest para los test
 
 ### Guía de instalación y uso.
+### Descripción del producto
 
+Es una librería para auditar archivos .md, con la cual podrás obtener los enlaces que contiene el archivo. 
+
+Descargar la librería desde [Node.js](https://www.npmjs.com/package/markdowngetlinks) con un 
 
 ```sh
-$ md-links ./some/example.md --stats --validate
-Total: 3
-Unique: 3
-Broken: 1
+$ npm i markdowngetlinks
 ```
+A continuación coloca en tu terminal la ruta de tu archivo y el comando mdlinks
 
+```sh
+$ mdlinks ./some/example.md 
+
+```
+De ésta forma, se retornarán los enlaces que contiene tu .md. Para validar si los enlaces están rotos o son funcionales coloca lo siguiente:
+
+```sh
+$ mdlinks ./some/example.md --validate
+
+```
   

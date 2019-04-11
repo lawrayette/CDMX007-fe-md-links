@@ -4,7 +4,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const path = require('path');
 const markdownLinkExtractor = require('markdown-link-extractor');
-
+let resultLinks = [];
 
 const mdLinks = (routeMD, option) => {
     // statSync reads information about the file specified in the path parameter
@@ -13,21 +13,22 @@ const mdLinks = (routeMD, option) => {
     extension = path.extname(routeMD) 
     
     if (extension === ".md") {
-        
         const markdown = fs.readFileSync(routeMD).toString();
         const links = markdownLinkExtractor(markdown);
-        let resultLinks = [];
+        
             for (let i = 0; i < links.length; i++) {
-                   
+                
+                    
             const arrPromise = fetch(links[i])
             .then(res => {
-                 if (option === "--validate") {
+                if (option === "--validate") {
                     let objetLinks = {
                         urlLinks: `${res.url}`,
                         statusLinks: `${res.status}`,
                         statusTextLinks: `${res.statusText}`,
                         ruta: `${routeMD}`
                         };
+                       
                         return objetLinks
                     } else {
                         let objetLinks = {
@@ -36,6 +37,7 @@ const mdLinks = (routeMD, option) => {
                           };
                         return objetLinks
                     }
+                  
                 })
                 .catch((err) => {
                     const objetErr = { statusLinks: "Fail" };
@@ -45,15 +47,17 @@ const mdLinks = (routeMD, option) => {
            
         }
         
-        const data =  Promise.all(resultLinks)
-        return data //
+        return Promise.all(resultLinks) //
        //returns a single Promise that resolves when all of the promises passed as an 
        //iterable have resolved or when the iterable contains no promises. Promise.all() 
        //method can be useful for aggregating the results of multiple promises. 
     }
-
+   
+   
     else {
         console.log("El archivo tiene que ser formato .md ")
     }
 }
+
+
 module.exports = mdLinks;
