@@ -35,12 +35,8 @@ const validate = (res) => {
   }
 
 };
-
-// Función que imprimirá State
-
-
 // Petición de enlaces funcionales o rotos
-const getRes = (link) => {
+const getFetch = (link) => {
    //console.log(result);
   fetch(link).then((res) => {
       //console.log(res);
@@ -54,12 +50,12 @@ const getLinks = (err, string) => {
       console.log(err.message);
   } else {
       const regEx = /(https?):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))/g;
-      const links = string.match(regEx);
+      let links = string.match(regEx);
       for (let i = 0; i < links.length; i++) {
-          const cutLink = links[i].split(')');
-          const result = cutLink[0];
-          // console.log(result);
-          getRes(result);
+          let cutLink = links[i].split(')');
+          let result = cutLink[0];
+          //console.log(result);
+          getFetch(result);
       };
   };
 };

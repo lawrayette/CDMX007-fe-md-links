@@ -368,8 +368,8 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 
 - [ ] Expone ejecutable `md-links` en el path (configurado en `package.json`)
 - [x] Se ejecuta sin errores / output esperado
-- [x] Implementa `--validate`
-- [] Implementa `--stats`
+- [ ] Implementa `--validate`
+- [ ] Implementa `--stats`
 
 ## Hacker Edition
 
